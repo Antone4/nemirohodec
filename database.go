@@ -8,7 +8,7 @@ var config = pgx.ConnConfig{
 	Host:                 "db",
 	User:                 "admin",
 	Password:             "postgres",
-	Database:             "postgres",
+	Database:             "admin",
 	PreferSimpleProtocol: true,
 }
 
