@@ -12,7 +12,7 @@ import (
 var router = mux.NewRouter()
 var store = sessions.NewCookieStore([]byte("0zxz0jRyzxk7D2CzCJ44Ix7cvOMu0P1m5VkYvf3OSyALs46KyjJguC13cE5fhXc4bjfWtY1w9IXmJot0DM37zof5mQzNy0um"))
 
-var thisPage string = "localhost:8888"
+var thisPage string = "185.50.203.67"
 
 func main() {
 	router.HandleFunc("/favicon.ico", func(w http.ResponseWriter, r *http.Request) {
@@ -51,7 +51,7 @@ func main() {
 
 func staticHandler(w http.ResponseWriter, r *http.Request) {
 	referer := r.Header.Get("Referer")
-	if strings.Contains(referer, ("http://" + thisPage + "/")) {
+	if strings.Contains(referer, ("http://" + thisPage)) {
 		// file, err := os.Open(r.URL.Path)
 		// defer file.Close()
 		// if err != nil {
