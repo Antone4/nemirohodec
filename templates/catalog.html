@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Merch shop">
+    <meta name="keywords" content="HTML,CSS">
+    <meta name="author1" content="Pokoev Anton">
+    <meta name="author2" content="Daniil Kunts">
+    <!-- Делает веб-страницу адаптивной по разрешению экрана-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог товаров</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+    {{ template "header" . }}
+    <main>
+        {{ template "regForm" . }}
+        <div class="container">
+            <section class="products">
+                <div class="product">
+                    <img src="static/Images/hudi.jpg" alt="Product 1">
+                    <div class="product_text">
+                        <h2>Графитовое ЗИП худи</h2>
+                        <p>Описание товара 1</p>
+                        <span class="price">999 ₽</span>
+                    </div>
+                </div>
+                <div class="product">
+                    <img src="static/Images/hudi2.jpg" alt="Product 2">
+                    <div class="product_text">
+                        <h2>Чёрное Худи OVERSIZE</h2>
+                        <p>Описание товара 2</p>
+                        <span class="price">999 ₽</span>
+                    </div>
+
+                </div>
+                <div class="product">
+                    <img src="static/Images/hudi.jpg" alt="Product 1">
+                    <div class="product_text">
+                        <h2>Графитовое ЗИП худи</h2>
+                        <p>Описание товара 1</p>
+                        <span class="price">1999 ₽</span>
+                    </div>
+                    
+                </div>
+                <!-- Добавьте больше продуктов здесь -->
+            </section>
+        </div>
+    </main>
+    <footer>
+        <div class="container_footer">
+          <p>&copy; 2024 "Не Мироходец"</p>
+        </div>
+      </footer>
+</body>
+</html>

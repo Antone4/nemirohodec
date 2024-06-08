@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Мой магазин</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+
+<body>
+  {{ template "header" . }}
+  <main>
+    {{ template "regForm" . }}
+    <div class="container">
+      <section class="products">
+
+        {{ range .Tovars }}
+        <div class="product" onclick="location.href='/item_{{ .Id }}'">
+          
+          <img src= {{ .ImgRef }} alt="Product 1">
+          <div class="product_text">
+            <h2>{{ .Name }}</h2>
+            <p>{{ .Description }}</p>
+            <span class="price"><em>{{ .Price }} ₽</em></span>
+          </div>
+        </div>
+        {{ end }}
+
+      </section>
+    </div>
+  </main>
+  
+  <footer>
+    <div class="container_footer">
+      <p>&copy; 2024 "Не Мироходец"</p>
+    </div>
+  </footer>
+</body>
+
+</html>

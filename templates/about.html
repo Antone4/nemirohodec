@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>О нас</title>
+  <link rel="stylesheet" href="static/styles.css">
+</head>
+
+<body>
+  {{ template "header" . }}
+    <main>
+      {{ template "regForm" . }}
+  <div>
+    
+    <script>
+      let query = "kzt";
+      function api_query()
+        {
+          if (query == "kzt") {
+            query = "rub";
+          } else {
+            query = "kzt";
+          }
+          var url = "https://suggestions.dadata.ru/suggestions/api/4_1/rs/findById/currency";
+          var token = "804372ec9cc0cc588b4034a01fd3239051652626";
+          var options = {
+              method: "POST",
+              mode: "cors",
+              headers: {
+                  "Content-Type": "application/json",
+                  "Accept": "application/json",
+                  "Authorization": "Token " + token
+              },
+              body: JSON.stringify({query: query})
+          }
+  
+        fetch(url, options)
+        .then(response => response.json()) // Преобразование ответа в объект JavaScript
+        .then(data => {
+            var responseContainer = document.getElementById('response-container');
+          responseContainer.innerHTML = '';
+            var suggestions = data.suggestions;
+  
+            // Создаем HTML-разметку для каждой подсказки
+            suggestions.forEach(suggestion => {
+                var value = suggestion.value;
+                var unrestrictedValue = suggestion.unrestricted_value;
+                var code = suggestion.data.code;
+                var strCode = suggestion.data.strcode;
+                var name = suggestion.data.name;
+                var country = suggestion.data.country;
+  
+                // Создаем HTML-элементы для отображения информации
+                var suggestionElement = document.createElement('div');
+                
+                suggestionElement.innerHTML = `
+                    <p>Value: ${value}</p>
+                    <p>Unrestricted Value: ${unrestrictedValue}</p>
+                    <p>Code: ${code}</p>
+                    <p>Str Code: ${strCode}</p>
+                    <p>Name: ${name}</p>
+                    <p>Country: ${country}</p>
+                `;
+  
+                // Добавляем созданные элементы в контейнер
+                responseContainer.appendChild(suggestionElement);
+            });
+        })
+        .catch(error => console.log("error", error));
+      }
+
+      api_query();
+
+    </script>
+    <!-- https://dadata.ru/api/suggest/currency/
+    https://learn.javascript.ru/fetch
+    https://web.postman.co/workspace/My-Workspace~725e0c7d-bb51-4724-86f5-fedc945a1998/request/create?requestId=2b29c75b-7780-457a-b3b0-25b43dc2688c-->
+    <div id="response-container" >
+        <!-- Здесь будет отображаться информация из API -->
+    </div>
+    <div> 
+        <button onclick="api_query()"> Поменять валюту</button> 
+      
+    </div>
+  </div>
+      
+    </main>
+    <footer>
+      <div class="container_footer">
+        <p>&copy; 2024 "Не Мироходец"</p>
+      </div>
+    </footer>
+</body>
+
+</html>

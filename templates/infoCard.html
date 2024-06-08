@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ .ThisTovar.Name }}</title>
+  <link rel="stylesheet" href="static/styles.css">
+  <script>
+
+    const itemId = "{{.ItemId}}";
+    const wsUrl = "ws://{{ .ThisPage }}/ws_item_" + itemId;
+    
+    const socket = new WebSocket(wsUrl);
+
+    socket.onmessage = function(e) {
+        document.getElementById('current_like_amount_1').innerText = e.data;
+    };
+
+    function send(action) {
+        socket.send(action);
+    }
+
+    document.getElementById('like').onclick = function() {
+        send('like_'+itemId);
+    };
+
+    document.getElementById('dislike').onclick = function() {
+        send('dislike_'+itemId);
+    };
+    
+  </script>
+</head>
+<body>
+    {{ template "header" . }}
+    {{ template "regForm" . }}
+    <div class ="product_info_card">
+        <div class="product_images">
+            <img src="{{ .ThisTovar.ImgRef }}" alt="нет">
+        </div>
+        <div class="product_info">
+            <div class="product_title">
+                <div class="title">{{ .ThisTovar.Name }}</div>
+                <div class="price_ret">
+                    <div class="price">{{ .ThisTovar.Price }} ₽</div>
+                    <div class="comment_footer">
+                        <div class="like_count" id="current_like_amount_1">{{ .LikesCount }}</div>
+                        <div class="like" id="like" ><img src="static/Images/thumbs-up.svg" alt="like" onclick="send('like');"></div>
+                        <div class="dislike" id="dislike" ><img src="static/Images/thumbs-down.svg" alt="dislike" onclick="send('dislike');"> </div>
+                    </div>
+
+                </div>
+                </div>
+            <div class="product_sizes">
+                <b>Размеры</b>
+                <div class="sizes_list">
+                    <button class="size">XS/S</button>
+                    <button class="size">S/M</button>
+                    <button class="size">L/XL</button>
+                </div>
+            </div>
+            <div class="product_action">
+                <div class="cart_buttons">
+                    <button class="cart "> Добавить в корзину </button>
+                    <div class="count_button">
+                        <button class="count_minus" id="minus">-</button>
+                        <div class="count_amount" id="current_amount">1</div>
+                        <button class="count_plus" id="plus">+</button>
+                    </div>
+                    <script src="static/script.js"></script> 
+                </div>
+            </div>
+            <div class="product_discription">
+                <div class="discription_title"><b>Описание</b><br><br></div>
+                <div class="discription_text">{{ .ThisTovar.Description }}</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="feedback">
+        <div class="comments_title"> Отзывы</div>  
+        
+        <div class="feedback_container">
+          <form action="" class="input_form">
+            <div class="input_feedback">
+              
+              <textarea name="123" id="123" placeholder="Напишите отзыв" rows="4" required="required"></textarea>
+            </div>
+            <button type="submit" onclick="return false;" class="sub_button">Отправить</button>
+          </form>
+            {{ template "comment_body" }}
+          </div>
+        
+      </div> -->
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Контакты</title>
+  <link rel="stylesheet" href="static/styles.css">
+  <script src="https://maps.api.2gis.ru/2.0/loader.js?pkg=full"></script>
+  <script type="text/javascript">
+      var map;
+
+      DG.then(function () {
+          map = DG.map('map', {
+              center: [55.793433599763965, 37.59061446840154],
+              zoom: 13
+          });
+
+          DG.marker([55.793433599763965, 37.59061446840154]).addTo(map).bindPopup('Да, наш офис именно здесь)))');
+      });
+    </script>
+</head>
+
+<body>
+  {{ template "header" . }}
+  <main>
+    {{ template "regForm" . }}
+    
+    <div class="container" font-family: Oswald>
+      <section class="contact-info">
+        <h2>Свяжитесь с нами</h2>
+        <p>Телефон: +7 800 555 35 35</p>
+        <p>Email: ne_mirochodec@inbox.com</p>
+        <p>Адрес: ул. Пушкина, Колотушкина</p>
+      </section>
+    </div>
+
+    
+    <div id="map" style="width:700px; height:500px"></div>
+  </main>
+  <footer>
+    <div class="container_footer">
+      <p>&copy; 2024 "Не Мироходец"</p>
+    </div>
+  </footer>
+</body>
+
+</html>

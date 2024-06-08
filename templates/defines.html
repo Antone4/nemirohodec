@@ -1,0 +1,131 @@
+
+
+{{ define "regForm" }}
+<div id="authWindow" class="modal">
+  <form class="modal-content-auth" id="authForm" method="post" action="">
+
+      <h1>Вход</h1>
+      <hr>
+      <label for="emailEnter"><b>Почта</b></label>
+      <input type="text" placeholder="Enter Email" name="emailEnter" id="emailEnter" required>
+      <div class="errorEmail_container">
+        <span id="emailError" class="error1">Некорректный E-Mail</span><br>
+      </div>
+      <label for="pswEnter"><b>Пароль</b></label>
+      <input type="password" placeholder="Enter Password" name="pswEnter" id="pswEnter" required>
+      <div class="error_psw_container">
+        <span id="pswError" class="error2">Длина пароля должна быть от 6 до 64 символов</span><br>
+      </div>
+      <label>
+        <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Запомнить меня
+      </label>
+      <div class="change">
+          <a type="button" onclick="document.getElementById('authWindow').style.display='none'; document.getElementById('regWindow').style.display='block'" style="width:auto;" ><p>У меня еще нет аккаунта</p></a>
+      </div>
+
+      <div class="clearfix">
+        <button type="button" onclick="modal1.style.display = 'none'"
+          class="cancelbtn">Отмена</button>
+        <button type="submit" class="signupbtn" id = "reg-button">Войти</button>
+      </div>
+
+  </form>
+  <script src="static/script.js"></script> 
+</div>
+
+<div id="regWindow" class="modal">
+  <form class="modal-content-reg" id="regForm"  method="post" action="">
+
+      <h1>Регистрация</h1>
+      <hr>
+      <label for="emailReg"><b>Почта</b></label>
+      <input type="text" placeholder="Enter Email" name="emailReg" id="emailReg" required>
+      <div class="errorEmail_container">
+        <span id="emailErrorReg" class="error1">Некорректный E-Mail</span><br>
+      </div>
+      <label for="pswReg"><b>Пароль</b></label>
+      <input type="password" placeholder="Enter Password" name="pswReg" id="pswReg" required>
+      <div class="error_psw_container">
+        <span id="pswErrorReg" class="error2">Длина пароля должна быть от 6 до 64 символов</span><br>
+      </div>
+      <label for="pswRepeatReg"><b>Повтор пароля</b></label>
+      <input type="password" placeholder="Repeat Password" name="pswRepeatReg" id="pswRepeatReg" required>
+      <div class="error_pswrepeat_container">
+        <span id="pswRepeatErrorReg" class="error3">Пароли не совпадают</span><br>
+      </div>
+      <label>
+        <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Запомнить меня
+      </label>
+      <br>
+      <div class="change">
+          <a onclick="document.getElementById('regWindow').style.display='none'; document.getElementById('authWindow').style.display='block'" style="width:auto;" ><p>У меня уже есть аккаунт</p></a>
+      </div>
+
+      <div class="clearfix">
+        <button type="button" onclick="modal.style.display = 'none'"
+          class="cancelbtn">Отмена</button>
+        <button type="submit" class="signupbtn" id = "reg-button">Зарегистрироваться</button>
+      </div>
+
+  </form>
+  <script src="static/script.js"></script> 
+</div>
+{{ end }}
+
+{{ define "header" }}
+<header>
+  <div class="container_header">
+      <h1>Товар</h1>
+      {{if .Authorized}}
+      
+      <div class="nav2" id="n2">
+          
+          <a href="/">Главная</a>
+          <a href="/catalog">Каталог</a>
+          <a href="/about">О нас</a>
+          <a href="/contact">Контакты</a>
+          <div class="profile_info">
+            <img src="https://api.dicebear.com/8.x/adventurer/svg?seed={{.Email}}" alt="avatar" onclick="open_menu()"/>
+            <div class="open" id="drop-menu">
+                  <a href="/deleteCookie">Exit</a>
+          </div>
+          </div>
+          
+      </div>
+      {{else}}
+      <div class="nav1" id="n1">
+          
+        <a href="/">Главная</a>
+        <a href="/catalog">Каталог</a>
+        <a href="/about">О нас</a>
+        <a href="/contact">Контакты</a>
+        <button onclick="document.getElementById('authWindow').style.display='block'" style="width:auto;">Войти</button>
+      {{end}}
+    </div>
+  </div>
+</header>
+{{ end }}
+
+
+{{ define "comment_body" }}
+<div class ="comment_content">
+
+  <div class="comment_body">
+    <div class="comment_profile_img">
+      <img src="https://api.dicebear.com/8.x/adventurer/svg?seed={{.Email}}" alt="avatar" onclick="open_menu()"/>
+    </div>
+    <div class="comment_text">
+      <p>
+        {{.comment_text}}
+      </p>
+    </div>
+  </div>
+
+  <div class="comment_footer">
+    <div class="like_count" id="current_like_amount_1">{{.like_count}}</div>
+    <i class="like" id="like_1"><img src="static/Images/thumbs-up.svg" alt="like"></i>
+    <i class="dislike" id="dislike_1"><img src="static/Images/thumbs-down.svg" alt="dislike"> </i>
+  </div>
+    <script src="static/script.js"></script>
+</div>
+{{ end }}
